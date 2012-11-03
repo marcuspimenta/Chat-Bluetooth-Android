@@ -47,7 +47,7 @@ public class MainActivity extends RoboActivity{
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
 
-	private final int BT_TIMER_VISIBLE = 300; 
+	public static int BT_TIMER_VISIBLE = 30; 
 
 	@InjectView(R.id.edtMsg)
 	private EditText edMsg;
@@ -273,4 +273,5 @@ public class MainActivity extends RoboActivity{
 		});
 		dialog.show();
 	}
+	
 }

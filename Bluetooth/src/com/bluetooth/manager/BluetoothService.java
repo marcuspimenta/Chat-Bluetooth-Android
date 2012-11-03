@@ -3,6 +3,8 @@ package com.bluetooth.manager;
 import java.io.IOException;
 import java.util.UUID;
 
+import com.bluetooth.activity.MainActivity;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
@@ -30,7 +32,7 @@ public class BluetoothService{
 		 
 		 try {
 			 serverSocket = adaptador.listenUsingRfcommWithServiceRecord(NAME_SERVICE_BT, ID_CONECTION); 
-			 socket = serverSocket.accept(); 
+			 socket = serverSocket.accept(MainActivity.BT_TIMER_VISIBLE * 1000); 
 			 
 		 } catch (IOException e) { 
 			 e.printStackTrace();
