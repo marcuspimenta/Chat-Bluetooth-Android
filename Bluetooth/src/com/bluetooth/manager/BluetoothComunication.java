@@ -50,8 +50,8 @@ public class BluetoothComunication extends Thread {
 			 
 			 while (true) {
 				 if(dataInputStream.available() > 0){
-					 byte[] msg = new byte[10];
-					 dataInputStream.read(msg, 0, msg.length);
+					 byte[] msg = new byte[dataInputStream.available()];
+					 dataInputStream.read(msg, 0, dataInputStream.available());
 					 
 					 sendHandler(whatMsgBT, nameBluetooth + ": " + new String(msg));
 				 }
