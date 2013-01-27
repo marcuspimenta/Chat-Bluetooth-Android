@@ -97,17 +97,21 @@ public class MainActivity extends RoboActivity{
 		btnSend.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				String msg = edMsg.getText().toString(); 
-				
-				if(msg.trim().length() > 0){
-					edMsg.setText(""); 
+				if(bluetoothComunication != null){
+					String msg = edMsg.getText().toString(); 
 					
-					bluetoothComunication.sendMessageByBluetooth(msg);
-					
-					historic.add("Eu: " + msg); 
-					historic.notifyDataSetChanged();							
+					if(msg.trim().length() > 0){
+						edMsg.setText(""); 
+						
+						bluetoothComunication.sendMessageByBluetooth(msg);
+						
+						historic.add("Eu: " + msg); 
+						historic.notifyDataSetChanged();							
+					}else{
+						notice.showToast("Escreva alguma mensagem");
+					}
 				}else{
-					notice.showToast("Escreva alguma mensagem");
+					notice.showToast("Sem conexão com outro dispositivo");
 				}
 			}
 		});
