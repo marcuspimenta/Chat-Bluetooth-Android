@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Chat Bluetooth</string>
+    <string name="server">Server</string>
+    <string name="client">Client</string>
+    <string name="send">Send</string>
+
+</resources>
