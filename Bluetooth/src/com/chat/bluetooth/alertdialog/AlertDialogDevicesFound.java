@@ -2,12 +2,13 @@ package com.chat.bluetooth.alertdialog;
 
 import java.util.List;
 
-import com.chat.bluetooth.business.IBusinessLogic.OnBluetoothDeviceSelectedListener;
-
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+
+import com.chat.bluetooth.R;
+import com.chat.bluetooth.business.IBusinessLogic.OnBluetoothDeviceSelectedListener;
 
 /**
  * 
@@ -36,7 +37,7 @@ public class AlertDialogDevicesFound extends AlertDialogGeneric implements OnCli
 			devices[i] = devicesFound.get(i).getName();
 		}
 		
-		alert.setTitle("Dispositivos encontrados");
+		alert.setTitle(context.getString(R.string.devices_found));
 		alert.setItems(devices, this);
 		
 		showAlertDialog();

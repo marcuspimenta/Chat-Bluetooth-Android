@@ -56,7 +56,7 @@ public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, Blueto
 		if(bluetoothSocket != null){
 			onBluetoothListener.onConnectionBluetooth(bluetoothSocket);
 		}else{
-			toastUtil.showToast("Falha na conexão");
+			toastUtil.showToast(context.getString(R.string.connection_failed));
 		}
 	}
 	

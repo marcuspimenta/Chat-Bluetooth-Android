@@ -7,7 +7,19 @@
     <string name="send">Send</string>
     
     <string name="waiting">Waiting</string>
-	<string name="msg_connecting_bluetooth">Connecting to the selected device...</string>
+	<string name="msg_searching_devices">Searching devices...</string>
     <string name="msg_waiting_connection">Waiting for connection...</string>
+	<string name="msg_connecting_bluetooth">Connecting to the selected device...</string>
 	
+	<string name="no_connection">No connection</string>
+	<string name="lost_connection">Lost connection</string>
+	<string name="connected_sucessfully">Connected successfully</string>
+	<string name="failed_to_send_message">Failed to send message</string>
+	<string name="connection_failed">Connection failed</string>
+	<string name="devices_found">Devices found</string>
+    <string name="enter_message">Enter message</string>
+    <string name="no_support_bluetooth">Your device does not support bluetooth</string>
+    <string name="activate_bluetooth_to_continue">You must activate bluetooth to continue</string>
+	<string name="device_must_visible">To start the server, your device must be visible</string>
+    
 </resources>

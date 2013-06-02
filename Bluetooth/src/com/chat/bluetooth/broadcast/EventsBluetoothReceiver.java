@@ -49,7 +49,7 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 		
 		progressDialog = ProgressDialog.show(context, 
 											 context.getText(R.string.waiting), 
-											 context.getText(R.string.msg_connecting_bluetooth));
+											 context.getText(R.string.msg_searching_devices));
 	}
 	
 	private void closeProgress() {

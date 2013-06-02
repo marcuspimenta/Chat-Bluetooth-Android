@@ -76,11 +76,11 @@ public class ChatActivity extends GenericActivity{
 					if(chatBusinessLogic.sendMessage(message)){
 						editTextMessage.setText(""); 
 						
-						historic.add("Eu: " + message); 
+						historic.add("I: " + message); 
 						historic.notifyDataSetChanged();			
 					}
 				}else{
-					toastUtil.showToast("Escreva alguma mensagem");
+					toastUtil.showToast(getString(R.string.enter_message));
 				}
 			}
 		});
@@ -113,7 +113,7 @@ public class ChatActivity extends GenericActivity{
 				startActivityForResult(enableBtIntent, BT_ACTIVATE);
 			}
 		} else {
-			toastUtil.showToast("Aparelho não suporta Bluetooth");
+			toastUtil.showToast(getString(R.string.no_support_bluetooth));
 			finish();
 		}
 	}
@@ -144,7 +144,7 @@ public class ChatActivity extends GenericActivity{
 		switch (requestCode) {
 			case BT_ACTIVATE:
 				if (RESULT_OK != resultCode) {
-					toastUtil.showToast("Você deve ativar o Bluetooth pra continuar");
+					toastUtil.showToast(getString(R.string.activate_bluetooth_to_continue));
 					finish(); 
 				}
 				break;
@@ -155,7 +155,7 @@ public class ChatActivity extends GenericActivity{
 					chatBusinessLogic.stopCommucanition();
 					chatBusinessLogic.startServer();
 				} else {
-					toastUtil.showToast("Para iniciar o servidor, seu aparelho deve estar visivel");
+					toastUtil.showToast(getString(R.string.device_must_visible));
 				}
 				break;
 		}
