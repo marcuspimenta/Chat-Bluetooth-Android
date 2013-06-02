@@ -5,7 +5,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.os.Handler;
+
+import com.chat.bluetooth.activity.ChatActivity;
+import com.chat.bluetooth.util.LogUtil;
 
 /**
  * 
@@ -15,69 +19,65 @@ import android.os.Handler;
  */
 public class BluetoothComunication extends Thread {
 	 
-	private int whatMsgBT;
-	private int whatMsgNotice;
-	
+	private boolean run;
 	private Handler handler;
 	
-	private BluetoothSocket socket;
-	private DataInputStream dataInputStream = null;
-	private DataOutputStream dataOutputStream = null;
+	private BluetoothSocket bluetoothSocket;
+	private DataInputStream dataInputStream;
+	private DataOutputStream dataOutputStream;
 	
-	public BluetoothComunication(Handler handler, int whatMsgBT, int whatMsgNotice){
+	public BluetoothComunication(Context context, Handler handler){
 		this.handler = handler;
-		this.whatMsgBT = whatMsgBT;
-		this.whatMsgNotice = whatMsgNotice;
+		
+		run = true;
 	}
 	
-	public void openComunication(BluetoothSocket socket){
-		this.socket = socket;
-		start();
+	public void setBluetoothSocket(BluetoothSocket bluetoothSocket){
+		this.bluetoothSocket = bluetoothSocket;
 	}
-	 
+	
 	@Override
 	public void run() {
 		 super.run();
 		
-		 String nameBluetooth;
-		
 		 try {
-			 nameBluetooth = socket.getRemoteDevice().getName();
-			 dataInputStream = new DataInputStream(socket.getInputStream());
-			 dataOutputStream = new DataOutputStream(socket.getOutputStream());
+			 String nameBluetooth = bluetoothSocket.getRemoteDevice().getName();
+			 dataInputStream = new DataInputStream(bluetoothSocket.getInputStream());
+			 dataOutputStream = new DataOutputStream(bluetoothSocket.getOutputStream());
 			
-			 sendHandler(whatMsgNotice, "Conexão realizada com sucesso");
+			 sendHandler(ChatActivity.MSG_TOAST, "Conexão realizada com sucesso");
 			 
-			 while (true) {
+			 while (run) {
 				 if(dataInputStream.available() > 0){
 					 byte[] msg = new byte[dataInputStream.available()];
 					 dataInputStream.read(msg, 0, dataInputStream.available());
 					 
-					 sendHandler(whatMsgBT, nameBluetooth + ": " + new String(msg));
+					 sendHandler(ChatActivity.MSG_BLUETOOTH, nameBluetooth + ": " + new String(msg));
 				 }
 			 }
-		 } catch (IOException e) {
-			 e.printStackTrace(); 
+		 }catch (IOException e) {
+			 LogUtil.e(e.getMessage());
 			 
-			 dataInputStream = null;
-			 dataOutputStream = null;
-			 
-			 sendHandler(whatMsgNotice, "Conexão perdida");
+			 stopComunication();
+			 sendHandler(ChatActivity.MSG_TOAST, "Conexão perdida");
 		 }
 	}
 	
-	public void sendMessageByBluetooth(String msg){
+	public boolean sendMessageByBluetooth(String msg){
 		try {
 			if(dataOutputStream != null){
 				dataOutputStream.write(msg.getBytes());
+				dataOutputStream.flush();
+				return true;
 			}else{
-				sendHandler(whatMsgNotice, "Sem conexão");
+				sendHandler(ChatActivity.MSG_TOAST, "Sem conexão");
+				return false;
 			}
-			
 		} catch (IOException e) {
-			e.printStackTrace(); 
-			 
-			sendHandler(whatMsgNotice, "Falha no envio da mensagem");
+			LogUtil.e(e.getMessage());
+			
+			sendHandler(ChatActivity.MSG_TOAST, "Falha no envio da mensagem");
+			return false;
 		}
 	}
 	
@@ -87,12 +87,21 @@ public class BluetoothComunication extends Thread {
            
 	 public void stopComunication(){ 
 		try {
+			run = false;
+			
+			if(bluetoothSocket != null){
+				bluetoothSocket.close();
+			}
+			
 			if(dataInputStream != null && dataOutputStream != null){
 				dataInputStream.close();
 				dataOutputStream.close();
+				
+				dataInputStream = null;
+				dataOutputStream = null;
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			LogUtil.e(e.getMessage());
 		}
 	 }
 	 

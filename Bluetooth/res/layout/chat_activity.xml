@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <ListView
-        android:id="@+id/lstHistoric"
+        android:id="@+id/listVewHistoric"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="1" >
@@ -17,7 +17,7 @@
         android:focusableInTouchMode="true" >
 
         <EditText
-            android:id="@+id/edtMsg"
+            android:id="@+id/editTextMessage"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -25,7 +25,7 @@
         </EditText>
 
         <Button
-            android:id="@+id/btnSend"
+            android:id="@+id/buttonSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/send" >
@@ -39,7 +39,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btnService"
+            android:id="@+id/buttonService"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,7 +47,7 @@
         </Button>
 
         <Button
-            android:id="@+id/btnClient"
+            android:id="@+id/buttonClient"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -17,17 +17,17 @@ public class BluetoothClient{
 	 private final UUID MEU_UUID_PC = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	
 	 public BluetoothSocket conectedBluetooth(BluetoothDevice device) {
-		 BluetoothSocket socket = null;
+		 BluetoothSocket bluetoothSocket = null;
 		 
 		 try {
-			 socket = device.createRfcommSocketToServiceRecord(MEU_UUID_PC);
-			 socket.connect();
+			 bluetoothSocket = device.createRfcommSocketToServiceRecord(MEU_UUID_PC);
+			 bluetoothSocket.connect();
 			 
 		 } catch (IOException e) { 
 			 e.printStackTrace();
 		 }
 		 
-		 return socket;
+		 return bluetoothSocket;
 	 }
 	 
  }

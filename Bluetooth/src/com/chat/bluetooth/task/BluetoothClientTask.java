@@ -1,14 +1,15 @@
 package com.chat.bluetooth.task;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Message;
 
+import com.chat.bluetooth.R;
+import com.chat.bluetooth.business.IBusinessLogic.OnConnectionBluetoothListener;
 import com.chat.bluetooth.communication.BluetoothClient;
+import com.chat.bluetooth.util.ToastUtil;
 
 /**
  * 
@@ -18,28 +19,27 @@ import com.chat.bluetooth.communication.BluetoothClient;
  */
 public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, BluetoothSocket>{
 
-	private Handler handler;
-	private Message message;
-	
-	private Activity activity;
+	private Context context;
 	private ProgressDialog progressDialog;
 	
+	private ToastUtil toastUtil;
 	private BluetoothClient bluetoothClient;
+	private OnConnectionBluetoothListener onBluetoothListener;
 	
-	public BluetoothClientTask(Activity activity, Handler handler, int what){
-		this.activity = activity;
-		this.handler = handler;
+	public BluetoothClientTask(Context context, OnConnectionBluetoothListener onBluetoothListener){
+		this.context = context;
+		this.onBluetoothListener = onBluetoothListener;
 		
-		message = new Message();
-		message.what = what;
-		
+		toastUtil = new ToastUtil(context);
 		bluetoothClient = new BluetoothClient();
 	}
 	
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		progressDialog = ProgressDialog.show(activity, "Aguarde", "Conectando com o dispositivo selecionado...");
+		progressDialog = ProgressDialog.show(context, 
+											 context.getText(R.string.waiting), 
+											 context.getText(R.string.msg_connecting_bluetooth));
 	}
 	
 	@Override
@@ -48,13 +48,16 @@ public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, Blueto
 	}
 	
 	@Override
-	protected void onPostExecute(BluetoothSocket result) {
-		super.onPostExecute(result);
+	protected void onPostExecute(BluetoothSocket bluetoothSocket) {
+		super.onPostExecute(bluetoothSocket);
 		
 		closeDialog();
 		
-		message.obj = result;
-		handler.dispatchMessage(message);
+		if(bluetoothSocket != null){
+			onBluetoothListener.onConnectionBluetooth(bluetoothSocket);
+		}else{
+			toastUtil.showToast("Falha na conexão");
+		}
 	}
 	
 	private void closeDialog() {

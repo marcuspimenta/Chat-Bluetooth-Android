@@ -5,5 +5,9 @@
     <string name="server">Server</string>
     <string name="client">Client</string>
     <string name="send">Send</string>
-
+    
+    <string name="waiting">Waiting</string>
+	<string name="msg_connecting_bluetooth">Connecting to the selected device...</string>
+    <string name="msg_waiting_connection">Waiting for connection...</string>
+	
 </resources>

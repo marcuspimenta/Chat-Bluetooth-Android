@@ -20,34 +20,18 @@ public class BluetoothService{
 	 private final String NAME_SERVICE_BT = "bluetooth";
 	 private final UUID ID_CONECTION = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); 
 
-	 private BluetoothAdapter adaptador; 
-	 private BluetoothServerSocket serverSocket; 
-	 
-	 public BluetoothService(BluetoothAdapter adaptador){
-		 this.adaptador = adaptador;
-	 }
-        
-	 public BluetoothSocket scanBluetooth() {
-		 BluetoothSocket socket = null;
+	 public BluetoothSocket startServer(BluetoothAdapter adaptador) {
+		 BluetoothSocket bluetoothSocket = null;
 		 
 		 try {
-			 serverSocket = adaptador.listenUsingRfcommWithServiceRecord(NAME_SERVICE_BT, ID_CONECTION); 
-			 socket = serverSocket.accept(ChatActivity.BT_TIMER_VISIBLE * 1000); 
+			 BluetoothServerSocket serverSocket = adaptador.listenUsingRfcommWithServiceRecord(NAME_SERVICE_BT, ID_CONECTION); 
+			 bluetoothSocket = serverSocket.accept(ChatActivity.BT_TIMER_VISIBLE * 1000); 
 			 
 		 } catch (IOException e) { 
 			 e.printStackTrace();
 		 }
 		 
-		 return socket;
-	 }
-	 
-	 public void closeServerSocket(){
-		 
-		 try {
-			 serverSocket.close();
-		 } catch (IOException e) {
-			 e.printStackTrace();
-		 }
+		 return bluetoothSocket;
 	 }
 	 
 }
