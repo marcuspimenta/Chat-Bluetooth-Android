@@ -18,18 +18,18 @@
 
         <EditText
             android:id="@+id/editTextMessage"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="47dip"
+            android:layout_weight="0.15"
             android:inputType="textLongMessage" >
         </EditText>
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/send" >
-        </Button>
+            android:layout_width="53dp"
+            android:layout_height="47dip"
+            android:src="@android:drawable/ic_menu_send" >
+        </ImageButton>
     </LinearLayout>
 
     <LinearLayout

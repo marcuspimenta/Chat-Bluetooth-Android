@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.chat.bluetooth.R;
@@ -31,9 +32,9 @@ public class ChatActivity extends GenericActivity{
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
 
-	private Button buttonSend;
 	private Button buttonService;
 	private Button buttonClient;
+	private ImageButton buttonSend;
 	private EditText editTextMessage;
 	private ListView listVewHistoric;
 	private ArrayAdapter<String> historic;
@@ -86,7 +87,7 @@ public class ChatActivity extends GenericActivity{
 		listVewHistoric = (ListView)findViewById(R.id.listVewHistoric);
 		listVewHistoric.setAdapter(historic);
 		
-		buttonSend = (Button)findViewById(R.id.buttonSend);
+		buttonSend = (ImageButton)findViewById(R.id.buttonSend);
 		buttonSend.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -153,6 +154,8 @@ public class ChatActivity extends GenericActivity{
                 	case 2:
                 		historic.add((String)(msg.obj));
        				 	historic.notifyDataSetChanged();
+       				 	
+       				 	listVewHistoric.requestFocus();
        				 	break;
                 }
             }
