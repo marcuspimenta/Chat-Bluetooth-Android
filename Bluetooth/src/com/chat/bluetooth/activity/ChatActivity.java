@@ -4,6 +4,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,6 +52,25 @@ public class ChatActivity extends GenericActivity{
 		inicializaBluetooth();
 		registerFilters();
 	}
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_chat_activity, menu);
+        return true;
+    }
+        
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.clean:
+                historic.clear();
+                historic.notifyDataSetChanged();
+                break;
+        }
+        
+        return super.onOptionsItemSelected(item);
+    }
 	
 	@Override
 	public void settingsAttributes() {

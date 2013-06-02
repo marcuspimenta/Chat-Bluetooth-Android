@@ -11,6 +11,7 @@
     <string name="msg_waiting_connection">Waiting for connection...</string>
 	<string name="msg_connecting_bluetooth">Connecting to the selected device...</string>
 	
+	<string name="clean_historic">Clean historic</string>
 	<string name="no_connection">No connection</string>
 	<string name="lost_connection">Lost connection</string>
 	<string name="connected_sucessfully">Connected successfully</string>
