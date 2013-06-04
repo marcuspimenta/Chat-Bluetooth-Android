@@ -22,5 +22,6 @@
     <string name="no_support_bluetooth">Your device does not support bluetooth</string>
     <string name="activate_bluetooth_to_continue">You must activate bluetooth to continue</string>
 	<string name="device_must_visible">To start the server, your device must be visible</string>
-    
+    <string name="no_device_found">No device found</string>
+	
 </resources>

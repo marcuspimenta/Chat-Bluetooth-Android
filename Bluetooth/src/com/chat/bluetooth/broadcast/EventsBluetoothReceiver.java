@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.IBusinessLogic.OnSearchBluetoothListener;
+import com.chat.bluetooth.util.ToastUtil;
 
 /**
  * 
@@ -25,6 +26,7 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 	private Context context;
 	private ProgressDialog progressDialog;
 	
+	private ToastUtil toastUtil;
 	private List<BluetoothDevice> devicesFound; 
 	private OnSearchBluetoothListener onSearchBluetoothListener;
 	
@@ -32,6 +34,7 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 		this.context = context;
 		this.onSearchBluetoothListener = onSearchBluetoothListener;
 		
+		toastUtil = new ToastUtil(context);
 		devicesFound = new ArrayList<BluetoothDevice>();
 	}
 	
@@ -67,7 +70,11 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 			if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(intent.getAction())){
 				closeProgress();
 				
-				onSearchBluetoothListener.onSearchBluetooth(devicesFound);
+				if(devicesFound.size() > 0){
+					onSearchBluetoothListener.onSearchBluetooth(devicesFound);
+				}else{
+					toastUtil.showToast(context.getString(R.string.no_device_found));
+				}
 			}
 		}
 	}
