@@ -50,7 +50,7 @@ public class ChatActivity extends GenericActivity{
 		settingsAttributes();
 		settingsView();
 		
-		inicializaBluetooth();
+		initializeBluetooth();
 		registerFilters();
 	}
 	
@@ -128,7 +128,7 @@ public class ChatActivity extends GenericActivity{
 		});
 	}
 	
-	public void inicializaBluetooth() {
+	public void initializeBluetooth() {
 		if (chatBusinessLogic.getBluetoothManager().verifySuportedBluetooth()) {
 			if (!chatBusinessLogic.getBluetoothManager().isEnabledBluetooth()) { 
 				Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE); 
